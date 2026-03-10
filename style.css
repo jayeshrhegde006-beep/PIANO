@@ -1,0 +1,300 @@
+:root {
+    --bg-color: #000000;
+    --panel-bg: #0a0a0a;
+    --accent-red: #ff003c;
+    --accent-red-glow: rgba(255, 0, 60, 0.6);
+    --text-main: #ffffff;
+    --text-muted: #666666;
+    --white-key: #ffffff;
+    --black-key: #111111;
+    --brutal-border: 4px solid #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 60, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 0, 60, 0.1) 0%, transparent 40%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.01) 0px, rgba(255, 255, 255, 0.01) 1px, transparent 1px, transparent 10px);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.app-container {
+    width: 95%;
+    max-width: 1200px;
+    background: var(--panel-bg);
+    border: var(--brutal-border);
+    padding: 40px;
+    box-shadow: 20px 20px 0px var(--accent-red);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+}
+
+.app-container::before {
+    content: "VIRTUAL PIANO // PRO";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: var(--accent-red);
+    color: black;
+    padding: 2px 10px;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 20px;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 42px;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: -2px;
+}
+
+h1 span {
+    color: var(--accent-red);
+    text-shadow: 3px 3px 0px white;
+}
+
+.controls {
+    display: flex;
+    gap: 24px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-red);
+    font-weight: 900;
+}
+
+select {
+    background: black;
+    border: 2px solid white;
+    border-radius: 0;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    accent-color: var(--accent-red);
+}
+
+.octave-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: black;
+    padding: 4px 12px;
+    border: 2px solid white;
+}
+
+.octave-controls button {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.octave-controls button:hover {
+    color: var(--accent-red);
+}
+
+#current-octave {
+    font-weight: 900;
+    min-width: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Piano Keys Styling */
+.piano-container {
+    display: flex;
+    position: relative;
+    height: 400px;
+    background: #000;
+    border: 4px solid white;
+    padding: 0;
+    overflow: visible;
+}
+
+.key {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+}
+
+.key.white {
+    background: var(--white-key);
+    margin: 0;
+    z-index: 1;
+    border-right: 1px solid #ddd;
+}
+
+.key.white:hover {
+    background: #f0f0f0;
+}
+
+.key.white.active {
+    background: var(--accent-red);
+    border-right: 1px solid transparent;
+}
+
+.key.black {
+    background: var(--black-key);
+    width: 6.5%;
+    height: 60%;
+    margin-left: -3.25%;
+    margin-right: -3.25%;
+    z-index: 2;
+    border-bottom: 8px solid #000;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+}
+
+.key.black:hover {
+    background: #222;
+}
+
+.key.black.active {
+    background: var(--accent-red);
+    border-bottom: 8px solid #900;
+    box-shadow: 0 0 30px var(--accent-red-glow);
+}
+
+/* Funky Red Glow when white key active */
+.key.white.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--accent-red-glow), transparent);
+    pointer-events: none;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #333;
+    padding-top: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.shortcuts strong {
+    color: var(--accent-red);
+}
+
+.pedal-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.indicator {
+    width: 16px;
+    height: 16px;
+    background: #222;
+    border: 2px solid white;
+    transition: all 0.2s;
+}
+
+.indicator.on {
+    background: var(--accent-red);
+    box-shadow: 0 0 15px var(--accent-red-glow);
+    transform: rotate(45deg);
+}
+
+/* Overlay - Funky Mode */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.overlay-content {
+    text-align: center;
+    border: 8px solid white;
+    padding: 60px;
+    background: black;
+    box-shadow: 20px 20px 0px var(--accent-red);
+}
+
+.overlay h2 {
+    font-size: 64px;
+    font-weight: 900;
+    font-style: italic;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.overlay p {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+#start-btn {
+    background: var(--accent-red);
+    color: black;
+    border: none;
+    padding: 24px 64px;
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#start-btn:hover {
+    transform: scale(1.05) rotate(-2deg);
+    background: white;
+}
